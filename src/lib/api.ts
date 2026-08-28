@@ -72,14 +72,14 @@ export const api = {
   },
 
   async upsertEntry(date: string, entry: ServerEntry): Promise<void> {
-    await request(`/api/entries/${date}`, {
+    await request(`/entries/${date}`, {
       method: 'PUT',
       body: JSON.stringify(entry),
     })
   },
 
   async deleteEntry(date: string): Promise<void> {
-    await request(`/api/entries/${date}`, { method: 'DELETE' })
+    await request(`/entries/${date}`, { method: 'DELETE' })
   },
 
   async upsertConfig(
@@ -92,11 +92,11 @@ export const api = {
   },
 
   async markPaid(month: string): Promise<void> {
-    await request(`/api/paid-months/${month}`, { method: 'PUT' })
+    await request(`/paid-months/${month}`, { method: 'PUT' })
   },
 
   async unmarkPaid(month: string): Promise<void> {
-    await request(`/api/paid-months/${month}`, { method: 'DELETE' })
+    await request(`/paid-months/${month}`, { method: 'DELETE' })
   },
 
   async migrate(payload: {
