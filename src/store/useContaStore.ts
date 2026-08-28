@@ -32,6 +32,8 @@ interface ContaState {
   updateExtra: (dateKey: string, extraId: string, patch: Partial<Extra>) => void
   removeExtra: (dateKey: string, extraId: string) => void
 
+  setNote: (dateKey: string, note: string) => void
+
   clearEntry: (dateKey: string) => void
   clearAll: () => void
 
@@ -99,6 +101,17 @@ export const useContaStore = create<ContaState>()(
           const updated: Entry = {
             ...current,
             extras: [...current.extras, extra],
+            updatedAt: new Date().toISOString(),
+          }
+          return { entries: { ...s.entries, [dateKey]: updated } }
+        }),
+
+      setNote: (dateKey, note) =>
+        set((s) => {
+          const current = s.entries[dateKey] ?? emptyEntry(dateKey)
+          const updated: Entry = {
+            ...current,
+            note,
             updatedAt: new Date().toISOString(),
           }
           return { entries: { ...s.entries, [dateKey]: updated } }
