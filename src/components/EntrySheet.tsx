@@ -46,7 +46,7 @@ const PriceField = ({
   const isCustom = entry[priceKey] !== undefined
 
   return (
-    <div className="rounded-lg border border-slate-200 bg-slate-50 dark:bg-slate-800 px-3 py-2">
+    <div className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 dark:border-slate-600 dark:bg-slate-800">
       <div className="flex items-center justify-between gap-2">
         <div className="flex-1">
           <div className="text-xs font-medium text-slate-500 dark:text-slate-400">{label}</div>
@@ -143,8 +143,8 @@ export function EntrySheet({ dateKey, onClose }: Props) {
               onClick={() => toggleActivity(dateKey, 'class')}
               className={`flex flex-col items-start gap-2 rounded-2xl border-2 p-4 text-left transition-all ${
                 entry.class
-                  ? 'border-emerald-500 bg-emerald-50'
-                  : 'border-slate-200 bg-white hover:border-slate-300'
+                  ? 'border-emerald-500 bg-emerald-50 dark:border-emerald-400 dark:bg-emerald-950/40'
+                  : 'border-slate-200 bg-white hover:border-slate-300 dark:border-slate-700 dark:bg-slate-800 dark:hover:border-slate-600'
               }`}
             >
               <span className="text-2xl">🎾</span>
@@ -163,8 +163,8 @@ export function EntrySheet({ dateKey, onClose }: Props) {
               onClick={() => toggleActivity(dateKey, 'game')}
               className={`flex flex-col items-start gap-2 rounded-2xl border-2 p-4 text-left transition-all ${
                 entry.game
-                  ? 'border-blue-500 bg-blue-50'
-                  : 'border-slate-200 bg-white hover:border-slate-300'
+                  ? 'border-blue-500 bg-blue-50 dark:border-blue-400 dark:bg-blue-950/40'
+                  : 'border-slate-200 bg-white hover:border-slate-300 dark:border-slate-700 dark:bg-slate-800 dark:hover:border-slate-600'
               }`}
             >
               <span className="text-2xl">🏓</span>
@@ -213,7 +213,7 @@ export function EntrySheet({ dateKey, onClose }: Props) {
             </div>
 
             {entry.extras.length > 0 && (
-              <ul className="mb-3 divide-y divide-slate-100 rounded-lg border border-slate-200">
+              <ul className="mb-3 divide-y divide-slate-100 rounded-lg border border-slate-200 dark:divide-slate-700 dark:border-slate-700">
                 {entry.extras.map((ex) => (
                   <li
                     key={ex.id}
@@ -243,7 +243,7 @@ export function EntrySheet({ dateKey, onClose }: Props) {
                 data-testid="extra-category"
                 value={extraCategory}
                 onChange={(e) => setExtraCategory(e.target.value)}
-                className="rounded-lg border border-slate-200 bg-white px-2 py-2.5 text-sm outline-none focus:border-emerald-500"
+                className="rounded-lg border border-slate-200 bg-white px-2 py-2 text-sm outline-none focus:border-emerald-500 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100"
               >
                 <option value="">Categoria...</option>
                 {EXTRA_CATEGORIES.map((c) => (
@@ -257,7 +257,7 @@ export function EntrySheet({ dateKey, onClose }: Props) {
                 placeholder="O quê? (ex: grip)"
                 value={extraLabel}
                 onChange={(e) => setExtraLabel(e.target.value)}
-                className="flex-1 rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-sm outline-none focus:border-emerald-500"
+                className="flex-1 rounded-lg border border-slate-200 bg-white px-2 py-2 text-sm outline-none focus:border-emerald-500 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100"
               />
               <input
                 type="text"
@@ -268,7 +268,7 @@ export function EntrySheet({ dateKey, onClose }: Props) {
                 onKeyDown={(e) => {
                   if (e.key === 'Enter') submitExtra()
                 }}
-                className="w-24 rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-sm outline-none focus:border-emerald-500"
+                className="w-24 rounded-lg border border-slate-200 bg-white px-2 py-2 text-sm outline-none focus:border-emerald-500 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100"
               />
               <button
                 type="button"
@@ -291,7 +291,7 @@ export function EntrySheet({ dateKey, onClose }: Props) {
               }
               placeholder="Algo pra lembrar desse dia?"
               rows={2}
-              className="w-full resize-none rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm outline-none focus:border-emerald-500"
+              className="w-full resize-none rounded-lg border border-slate-200 bg-white px-2 py-2 text-sm outline-none focus:border-emerald-500 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100"
             />
           </div>
 

@@ -91,7 +91,7 @@ export function TodayCard({ onQuickAction, onOpenEntry }: Props) {
         <button
           type="button"
           onClick={() => onOpenEntry(today)}
-          className="rounded-lg bg-white px-3 py-1 text-xs font-semibold text-slate-900 hover:bg-slate-100"
+          className="rounded-lg bg-white/15 px-3 py-1 text-xs font-semibold text-white hover:bg-white/25"
         >
           {hasAny ? 'Editar' : 'Adicionar extras'}
         </button>
