@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useContaStore } from '../store/useContaStore'
 import { parseAmount } from '../lib/totals'
 import { CloseIcon, PlusIcon, TrashIcon } from '../components/icons'
+import { BackupButton } from '../components/BackupButton'
 import type { ActivityType } from '../types'
 
 const daysLabel = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb']
@@ -234,6 +235,11 @@ export function Config() {
             </button>
           </div>
         )}
+      </section>
+
+      <section className="rounded-2xl border border-slate-200 bg-white p-4">
+        <h2 className="mb-3 text-sm font-semibold text-slate-700">Backup</h2>
+        <BackupButton />
       </section>
 
       <section className="rounded-2xl border border-red-200 bg-red-50 p-4">
