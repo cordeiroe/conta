@@ -2,6 +2,11 @@ import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 import type { ActivityType, Config, Entry, Extra } from '../types'
 import { todayKey } from '../lib/dates'
+import {
+  markMonthPaid,
+  unmarkMonthPaid,
+  type PaidMonthsMap,
+} from '../lib/paidMonths'
 
 const uid = () =>
   typeof crypto !== 'undefined' && 'randomUUID' in crypto
@@ -19,6 +24,7 @@ const emptyEntry = (dateKey: string): Entry => ({
 interface ContaState {
   config: Config
   entries: Record<string, Entry>
+  paidMonths: PaidMonthsMap
 
   setConfig: (patch: Partial<Config>) => void
   resetConfig: () => void
@@ -36,6 +42,8 @@ interface ContaState {
 
   clearEntry: (dateKey: string) => void
   clearAll: () => void
+
+  toggleMonthPaid: (monthKey: string) => void
 
   addScheduleRule: (rule: Omit<Config['schedule'][number], 'id' | 'enabled'> & { enabled?: boolean }) => void
   updateScheduleRule: (id: string, patch: Partial<Config['schedule'][number]>) => void
@@ -56,6 +64,7 @@ export const useContaStore = create<ContaState>()(
     (set, get) => ({
       config: defaultConfig,
       entries: {},
+      paidMonths: {},
 
       setConfig: (patch) =>
         set((s) => ({ config: { ...s.config, ...patch } })),
@@ -152,6 +161,16 @@ export const useContaStore = create<ContaState>()(
 
       clearAll: () => set({ entries: {} }),
 
+      toggleMonthPaid: (monthKey) =>
+        set((s) => {
+          const exists = monthKey in s.paidMonths
+          return {
+            paidMonths: exists
+              ? unmarkMonthPaid(s.paidMonths, monthKey)
+              : markMonthPaid(s.paidMonths, monthKey),
+          }
+        }),
+
       addScheduleRule: (rule) =>
         set((s) => ({
           config: {
@@ -183,7 +202,15 @@ export const useContaStore = create<ContaState>()(
     }),
     {
       name: 'conta-store',
-      version: 1,
+      version: 2,
+      migrate: (persisted: unknown, version: number) => {
+        if (!persisted || typeof persisted !== 'object') return persisted
+        const state = persisted as Record<string, unknown>
+        if (version < 2 && !('paidMonths' in state)) {
+          return { ...state, paidMonths: {} }
+        }
+        return state
+      },
     },
   ),
 )

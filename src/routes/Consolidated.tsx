@@ -4,12 +4,15 @@ import { totalsForMonth } from '../lib/totals'
 import { formatMoney } from '../lib/totals'
 import { buildWhatsappMessage } from '../lib/whatsapp'
 import { yearTotals } from '../lib/year'
+import { isMonthPaid } from '../lib/paidMonths'
 import { monthLabel, fromKey, monthKey, dayLabel } from '../lib/dates'
 import { ChevronLeftIcon, ChevronRightIcon, CopyIcon, WhatsappIcon } from '../components/icons'
 
 export function Consolidated() {
   const entries = useContaStore((s) => s.entries)
   const config = useContaStore((s) => s.config)
+  const paidMonths = useContaStore((s) => s.paidMonths)
+  const toggleMonthPaid = useContaStore((s) => s.toggleMonthPaid)
   const [anchor, setAnchor] = useState<Date>(() => new Date())
   const [copied, setCopied] = useState(false)
 
@@ -84,9 +87,19 @@ export function Consolidated() {
         >
           <ChevronLeftIcon size={20} />
         </button>
-        <h1 className="text-lg font-semibold capitalize text-slate-900">
-          {monthLabel(anchor)}
-        </h1>
+        <div className="flex items-center gap-2">
+          <h1 className="text-lg font-semibold capitalize text-slate-900">
+            {monthLabel(anchor)}
+          </h1>
+          {isMonthPaid(paidMonths, monthKey(anchor)) && (
+            <span
+              data-testid="paid-badge"
+              className="rounded-full bg-emerald-100 px-2 py-0.5 text-xs font-semibold text-emerald-700"
+            >
+              ✓ Pago
+            </span>
+          )}
+        </div>
         <button
           type="button"
           onClick={() => shift(1)}
@@ -95,6 +108,21 @@ export function Consolidated() {
           <ChevronRightIcon size={20} />
         </button>
       </div>
+
+      <button
+        type="button"
+        data-testid="toggle-paid"
+        onClick={() => toggleMonthPaid(monthKey(anchor))}
+        className={`w-full rounded-2xl border px-4 py-2.5 text-sm font-semibold transition-colors ${
+          isMonthPaid(paidMonths, monthKey(anchor))
+            ? 'border-emerald-200 bg-emerald-50 text-emerald-700'
+            : 'border-slate-200 bg-white text-slate-700 hover:bg-slate-50'
+        }`}
+      >
+        {isMonthPaid(paidMonths, monthKey(anchor))
+          ? '✓ Marcado como pago — clique para desfazer'
+          : 'Marcar mês como pago'}
+      </button>
 
       <div className="rounded-3xl bg-gradient-to-br from-emerald-500 to-emerald-600 p-5 text-white shadow-lg">
         <div className="text-xs uppercase tracking-wide text-emerald-100">
