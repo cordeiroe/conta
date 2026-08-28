@@ -6,7 +6,12 @@ export interface Extra {
   id: string
   label: string
   amount: number
+  category?: string
 }
+
+export const EXTRA_CATEGORIES = ['grip', 'bola', 'avulsa', 'outro'] as const
+
+export type ExtraCategory = (typeof EXTRA_CATEGORIES)[number]
 
 export interface Entry {
   date: string
@@ -15,6 +20,7 @@ export interface Entry {
   game: boolean
   gamePrice?: number
   extras: Extra[]
+  note?: string
   updatedAt: string
 }
 

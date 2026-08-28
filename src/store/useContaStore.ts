@@ -2,6 +2,11 @@ import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 import type { ActivityType, Config, Entry, Extra } from '../types'
 import { todayKey } from '../lib/dates'
+import {
+  markMonthPaid,
+  unmarkMonthPaid,
+  type PaidMonthsMap,
+} from '../lib/paidMonths'
 
 const uid = () =>
   typeof crypto !== 'undefined' && 'randomUUID' in crypto
@@ -19,6 +24,7 @@ const emptyEntry = (dateKey: string): Entry => ({
 interface ContaState {
   config: Config
   entries: Record<string, Entry>
+  paidMonths: PaidMonthsMap
 
   setConfig: (patch: Partial<Config>) => void
   resetConfig: () => void
@@ -28,12 +34,19 @@ interface ContaState {
   toggleActivity: (dateKey: string, type: ActivityType) => void
   setActivityPrice: (dateKey: string, type: ActivityType, price: number | undefined) => void
 
-  addExtra: (dateKey: string, label: string, amount: number) => void
+  addExtra: (dateKey: string, label: string, amount: number, category?: string) => void
   updateExtra: (dateKey: string, extraId: string, patch: Partial<Extra>) => void
   removeExtra: (dateKey: string, extraId: string) => void
 
+  setNote: (dateKey: string, note: string) => void
+
   clearEntry: (dateKey: string) => void
   clearAll: () => void
+
+  toggleMonthPaid: (monthKey: string) => void
+
+  setEntries: (entries: Record<string, Entry>) => void
+  setPaidMonths: (paidMonths: PaidMonthsMap) => void
 
   addScheduleRule: (rule: Omit<Config['schedule'][number], 'id' | 'enabled'> & { enabled?: boolean }) => void
   updateScheduleRule: (id: string, patch: Partial<Config['schedule'][number]>) => void
@@ -54,6 +67,7 @@ export const useContaStore = create<ContaState>()(
     (set, get) => ({
       config: defaultConfig,
       entries: {},
+      paidMonths: {},
 
       setConfig: (patch) =>
         set((s) => ({ config: { ...s.config, ...patch } })),
@@ -92,13 +106,26 @@ export const useContaStore = create<ContaState>()(
           return { entries: { ...s.entries, [dateKey]: updated } }
         }),
 
-      addExtra: (dateKey, label, amount) =>
+      addExtra: (dateKey, label, amount, category) =>
         set((s) => {
           const current = s.entries[dateKey] ?? emptyEntry(dateKey)
-          const extra: Extra = { id: uid(), label, amount }
+          const extra: Extra = category
+            ? { id: uid(), label, amount, category }
+            : { id: uid(), label, amount }
           const updated: Entry = {
             ...current,
             extras: [...current.extras, extra],
+            updatedAt: new Date().toISOString(),
+          }
+          return { entries: { ...s.entries, [dateKey]: updated } }
+        }),
+
+      setNote: (dateKey, note) =>
+        set((s) => {
+          const current = s.entries[dateKey] ?? emptyEntry(dateKey)
+          const updated: Entry = {
+            ...current,
+            note,
             updatedAt: new Date().toISOString(),
           }
           return { entries: { ...s.entries, [dateKey]: updated } }
@@ -139,6 +166,19 @@ export const useContaStore = create<ContaState>()(
 
       clearAll: () => set({ entries: {} }),
 
+      toggleMonthPaid: (monthKey) =>
+        set((s) => {
+          const exists = monthKey in s.paidMonths
+          return {
+            paidMonths: exists
+              ? unmarkMonthPaid(s.paidMonths, monthKey)
+              : markMonthPaid(s.paidMonths, monthKey),
+          }
+        }),
+
+      setEntries: (entries) => set({ entries }),
+      setPaidMonths: (paidMonths) => set({ paidMonths }),
+
       addScheduleRule: (rule) =>
         set((s) => ({
           config: {
@@ -170,7 +210,15 @@ export const useContaStore = create<ContaState>()(
     }),
     {
       name: 'conta-store',
-      version: 1,
+      version: 2,
+      migrate: (persisted: unknown, version: number) => {
+        if (!persisted || typeof persisted !== 'object') return persisted
+        const state = persisted as Record<string, unknown>
+        if (version < 2 && !('paidMonths' in state)) {
+          return { ...state, paidMonths: {} }
+        }
+        return state
+      },
     },
   ),
 )

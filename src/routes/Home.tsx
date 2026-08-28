@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { TodayCard } from '../components/TodayCard'
+import { WeeklyCard } from '../components/WeeklyCard'
 import { MonthGrid } from '../components/MonthGrid'
 import { EntrySheet } from '../components/EntrySheet'
 import { useContaStore } from '../store/useContaStore'
@@ -32,7 +33,9 @@ export function Home() {
         onOpenEntry={setOpenDate}
       />
 
-      <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+      <WeeklyCard />
+
+      <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-900">
         <MonthGrid
           anchor={anchor}
           onChangeAnchor={setAnchor}
@@ -40,7 +43,7 @@ export function Home() {
         />
       </div>
 
-      <p className="text-center text-xs text-slate-400">
+      <p className="text-center text-xs text-slate-400 dark:text-slate-500">
         Toque em qualquer dia para editar ou registrar retroativamente.
       </p>
 
