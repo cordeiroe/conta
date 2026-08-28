@@ -1,7 +1,7 @@
 import type { Config, Entry } from '../types'
 
 const WORKER_URL =
-  import.meta.env.VITE_WORKER_URL ?? 'https://api.conta.cordeiroe.dev'
+  import.meta.env.VITE_WORKER_URL ?? 'https://api-conta.cordeiroe.dev'
 
 const DEV_USER = import.meta.env.VITE_DEV_USER ?? ''
 
