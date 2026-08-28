@@ -3,6 +3,9 @@ main = "src/index.ts"
 compatibility_date = "2024-09-01"
 compatibility_flags = ["nodejs_compat"]
 
+# Keep workers.dev enabled as a fallback (e.g., for stale browser cache)
+workers_dev = true
+
 [observability]
 enabled = true
 
