@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { BottomNav } from './components/BottomNav'
+import { SyncRoot } from './components/SyncRoot'
 import { Home } from './routes/Home'
 import { Consolidated } from './routes/Consolidated'
 import { Config } from './routes/Config'
@@ -16,6 +17,7 @@ export default function App() {
         </Routes>
       </main>
       <BottomNav />
+      <SyncRoot />
     </BrowserRouter>
   )
 }

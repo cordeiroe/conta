@@ -39,6 +39,7 @@ export interface Config {
   professorName: string
   notificationHourOffset: number
   schedule: ScheduleRule[]
+  updatedAt?: string
 }
 
 export interface MonthTotals {

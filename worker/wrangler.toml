@@ -1,0 +1,31 @@
+name = "conta-worker"
+main = "src/index.ts"
+compatibility_date = "2024-09-01"
+compatibility_flags = ["nodejs_compat"]
+
+[observability]
+enabled = true
+
+# D1 database binding
+[[d1_databases]]
+binding = "DB"
+database_name = "conta-db"
+database_id = "659d89fd-1a0f-4138-a203-7feb5fd3349a"
+migrations_dir = "migrations"
+
+# Production vars
+[vars]
+ENVIRONMENT = "production"
+ALLOWED_ORIGIN = "https://conta.cordeiroe.dev"
+
+# Dev overrides
+[env.dev]
+[[env.dev.d1_databases]]
+binding = "DB"
+database_name = "conta-db"
+database_id = "conta-db"
+migrations_dir = "migrations"
+
+[env.dev.vars]
+ENVIRONMENT = "development"
+ALLOWED_ORIGIN = "http://localhost:5173"
