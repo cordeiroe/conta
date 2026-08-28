@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 600" role="img" aria-label="Conta">
+  <rect width="1800" height="600" rx="72" fill="#f8fafc"/>
+  <g transform="translate(80 80)">
+    <g fill="none" stroke="#10b981" stroke-width="58" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M 358 163 A 143 143 0 1 0 358 359"/>
+      <path d="M 204 271 L 246 313 L 328 222"/>
+    </g>
+  </g>
+  <text x="640" y="395" fill="#0f172a" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif" font-size="320" font-weight="700" letter-spacing="-14">Conta</text>
+</svg>
