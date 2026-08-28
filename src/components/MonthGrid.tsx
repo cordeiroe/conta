@@ -48,7 +48,11 @@ export function MonthGrid({ anchor, onChangeAnchor, onSelectDay }: Props) {
         ))}
       </div>
 
-      <div data-testid="month-grid" className="animate-month-fade grid grid-cols-7 gap-1">
+      <div
+        data-testid="month-grid"
+        key={`${anchor.getFullYear()}-${anchor.getMonth()}`}
+        className="animate-month-fade grid grid-cols-7 gap-1"
+      >
         {days.map((day) => {
           const k = dayKey(day)
           const e = entries[k]
