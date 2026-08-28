@@ -37,3 +37,7 @@ firebase-debug.*.log
 # Service account keys (never commit)
 *-firebase-adminsdk-*.json
 serviceAccount*.json
+
+# Private docs (not for portfolio)
+ARCHITECTURE.md
+PRODUCT.md
