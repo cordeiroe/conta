@@ -67,10 +67,10 @@ export function MonthGrid({ anchor, onChangeAnchor, onSelectDay }: Props) {
               disabled={!inMonth}
               className={`relative flex aspect-square flex-col items-center justify-center rounded-xl text-sm transition-all ${
                 !inMonth
-                  ? 'text-slate-300'
+                  ? 'text-slate-300 dark:text-slate-600'
                   : today
-                    ? 'bg-slate-900 font-semibold text-white'
-                    : 'text-slate-700 hover:bg-slate-100'
+                    ? 'bg-slate-900 font-semibold text-white dark:bg-white dark:text-slate-900'
+                    : 'text-slate-700 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800'
               }`}
             >
               <span>{day.getDate()}</span>

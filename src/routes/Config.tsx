@@ -4,6 +4,7 @@ import { parseAmount } from '../lib/totals'
 import { CloseIcon, PlusIcon, TrashIcon } from '../components/icons'
 import { BackupButton } from '../components/BackupButton'
 import { RestoreButton } from '../components/RestoreButton'
+import { ThemeToggle } from '../components/ThemeToggle'
 import type { ActivityType } from '../types'
 
 const daysLabel = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb']
@@ -53,6 +54,11 @@ export function Config() {
       style={{ paddingTop: 'calc(1.5rem + env(safe-area-inset-top, 0px))' }}
     >
       <h1 className="text-xl font-semibold text-slate-900">Configurações</h1>
+
+      <section className="rounded-2xl border border-slate-200 bg-white p-4">
+        <h2 className="mb-3 text-sm font-semibold text-slate-700">Tema</h2>
+        <ThemeToggle />
+      </section>
 
       <section className="rounded-2xl border border-slate-200 bg-white p-4">
         <h2 className="mb-3 text-sm font-semibold text-slate-700">Preços</h2>

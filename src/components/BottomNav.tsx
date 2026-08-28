@@ -9,7 +9,7 @@ const items = [
 
 export function BottomNav() {
   return (
-    <nav className="fixed bottom-0 inset-x-0 z-30 border-t border-slate-200 bg-white/95 backdrop-blur pb-[env(safe-area-inset-bottom)]">
+    <nav className="fixed bottom-0 inset-x-0 z-30 border-t border-slate-200 bg-white/95 backdrop-blur pb-[env(safe-area-inset-bottom)] dark:border-slate-700 dark:bg-slate-900/95">
       <ul className="mx-auto flex max-w-md">
         {items.map((it) => (
           <li key={it.to} className="flex-1">
