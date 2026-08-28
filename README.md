@@ -112,10 +112,7 @@ Pipeline:
 1. **Lint** (oxlint)
 2. **Build** (`npm run build` → `dist/`)
 3. **Deploy** (`wrangler pages deploy` → Cloudflare Pages)
-4. **Live** em https://conta-f0c65.pages.dev + https://conta.cordeiroe.dev
-
-Secrets necessários no GitHub:
-- `CLOUDFLARE_API_TOKEN` — token com permissões Pages + DNS + Access
+4. **Live** em https://conta.cordeiroe.dev
 
 ## Licença
 
@@ -124,6 +121,5 @@ MIT
 ## Autor
 
 **Emerson Marques** ([@cordeiroe](https://github.com/cordeiroe))
-- Dev full-stack (Node + React)
-- Internacional
+- Software Engineer
 - Jogador de padel 🎾
