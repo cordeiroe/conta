@@ -1,0 +1,12 @@
+# Wrangler local dev state
+.wrangler/
+node_modules/
+*.log
+
+# TypeScript build output
+dist/
+
+# Env
+.env
+.env.*
+!.env.example

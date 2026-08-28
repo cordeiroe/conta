@@ -1,5 +1,3 @@
-import type { Env } from './auth'
-
 export interface ConfigRow {
   user_email: string
   class_price: number

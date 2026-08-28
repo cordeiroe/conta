@@ -19,6 +19,13 @@ ENVIRONMENT = "production"
 ALLOWED_ORIGIN = "https://conta.cordeiroe.dev"
 
 # Dev overrides
+[env.dev]
+[[env.dev.d1_databases]]
+binding = "DB"
+database_name = "conta-db"
+database_id = "conta-db"
+migrations_dir = "migrations"
+
 [env.dev.vars]
 ENVIRONMENT = "development"
 ALLOWED_ORIGIN = "http://localhost:5173"

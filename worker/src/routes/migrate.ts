@@ -1,6 +1,6 @@
 import type { Env } from '../auth'
 import { errorResponse, jsonResponse } from '../auth'
-import { ensureUser, getConfig, getEntries, getPaidMonths } from '../db'
+import { ensureUser, getConfig, getEntries } from '../db'
 
 interface MigrateBody {
   config?: {

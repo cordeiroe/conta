@@ -24,6 +24,7 @@ export function useSync() {
     initialized.current = true
 
     void loadFromServer()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   async function loadFromServer() {
