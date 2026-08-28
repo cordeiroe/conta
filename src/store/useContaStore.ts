@@ -45,6 +45,9 @@ interface ContaState {
 
   toggleMonthPaid: (monthKey: string) => void
 
+  setEntries: (entries: Record<string, Entry>) => void
+  setPaidMonths: (paidMonths: PaidMonthsMap) => void
+
   addScheduleRule: (rule: Omit<Config['schedule'][number], 'id' | 'enabled'> & { enabled?: boolean }) => void
   updateScheduleRule: (id: string, patch: Partial<Config['schedule'][number]>) => void
   removeScheduleRule: (id: string) => void
@@ -170,6 +173,9 @@ export const useContaStore = create<ContaState>()(
               : markMonthPaid(s.paidMonths, monthKey),
           }
         }),
+
+      setEntries: (entries) => set({ entries }),
+      setPaidMonths: (paidMonths) => set({ paidMonths }),
 
       addScheduleRule: (rule) =>
         set((s) => ({
