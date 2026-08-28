@@ -3,6 +3,7 @@ import { totalsForMonth } from '../lib/totals'
 import { todayKey } from '../lib/dates'
 import { formatMoney } from '../lib/totals'
 import { longDate } from '../lib/dates'
+import { currentClassStreak } from '../lib/streak'
 import type { ActivityType, Entry } from '../types'
 
 const EMPTY_ENTRY: Entry = {
@@ -24,6 +25,7 @@ export function TodayCard({ onQuickAction, onOpenEntry }: Props) {
   const config = useContaStore((s) => s.config)
   const entries = useContaStore((s) => s.entries)
   const totals = totalsForMonth(entries, config, new Date())
+  const streak = currentClassStreak(entries, new Date())
   const hasAny = entry.class || entry.game || entry.extras.length > 0
 
   return (
@@ -67,6 +69,18 @@ export function TodayCard({ onQuickAction, onOpenEntry }: Props) {
           <span>🏓</span> {entry.game ? 'Teve jogo' : 'Tive jogo'}
         </button>
       </div>
+
+      {streak > 0 && (
+        <div
+          data-testid="streak-badge"
+          className="mt-3 flex items-center justify-center gap-2 rounded-2xl bg-orange-500/15 px-4 py-2 text-orange-300"
+        >
+          <span aria-hidden>🔥</span>
+          <span className="text-sm font-semibold">
+            {streak} {streak === 1 ? 'aula seguida' : 'aulas seguidas'}
+          </span>
+        </div>
+      )}
 
       <div className="mt-3 flex items-center justify-between rounded-2xl bg-white/5 px-4 py-2.5">
         <div className="text-xs text-slate-300">
