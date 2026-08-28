@@ -1,7 +1,12 @@
 import type { Config, Entry } from '../types'
 
 const WORKER_URL =
-  import.meta.env.VITE_WORKER_URL ?? 'https://api-conta.cordeiroe.dev'
+  import.meta.env.VITE_WORKER_URL ?? ''
+
+// When no VITE_WORKER_URL is set, we call same-origin /api/* which is
+// proxied by a Pages Function to the Cloudflare Worker. Same-origin means
+// cookies are sent automatically (no CORS dance needed).
+const BASE = WORKER_URL || '/api'
 
 const DEV_USER = import.meta.env.VITE_DEV_USER ?? ''
 
@@ -43,7 +48,7 @@ function fetchOptions(init: RequestInit = {}): RequestInit {
 }
 
 async function request<T>(path: string, init: RequestInit = {}): Promise<T> {
-  const res = await fetch(`${WORKER_URL}${path}`, fetchOptions(init))
+  const res = await fetch(`${BASE}${path}`, fetchOptions(init))
   if (!res.ok) {
     const text = await res.text().catch(() => '')
     throw new ApiError(res.status, text || res.statusText)
