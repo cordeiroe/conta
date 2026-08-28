@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { TodayCard } from '../components/TodayCard'
+import { WeeklyCard } from '../components/WeeklyCard'
 import { MonthGrid } from '../components/MonthGrid'
 import { EntrySheet } from '../components/EntrySheet'
 import { useContaStore } from '../store/useContaStore'
@@ -31,6 +32,8 @@ export function Home() {
         onQuickAction={handleQuickAction}
         onOpenEntry={setOpenDate}
       />
+
+      <WeeklyCard />
 
       <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
         <MonthGrid
