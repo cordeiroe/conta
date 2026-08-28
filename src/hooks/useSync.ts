@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react'
 import { useContaStore } from '../store/useContaStore'
 import { api, entryToServerPayload, serverEntryToEntry } from '../lib/api'
 import { monthKey as monthKeyOf } from '../lib/dates'
+import type { Config } from '../types'
 
 /**
  * Sync layer that:
@@ -33,9 +34,14 @@ export function useSync() {
 
       // Config (replace local if server has it; else keep local default)
       if (data.config) {
-        const { updated_at: _updatedAt, ...configWithoutMeta } = data.config
+        const { updated_at: _updatedAt, schedule, ...rest } = data.config
+        // D1 stores schedule as a JSON string — parse it back to an array
+        const parsedSchedule = typeof schedule === 'string'
+          ? (JSON.parse(schedule) as Config['schedule'])
+          : (schedule ?? [])
         setConfig({
-          ...configWithoutMeta,
+          ...rest,
+          schedule: parsedSchedule,
           updatedAt: _updatedAt,
         } as Parameters<typeof setConfig>[0] & { updatedAt: string })
       }
