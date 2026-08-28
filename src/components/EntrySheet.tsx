@@ -46,10 +46,10 @@ const PriceField = ({
   const isCustom = entry[priceKey] !== undefined
 
   return (
-    <div className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-2">
+    <div className="rounded-lg border border-slate-200 bg-slate-50 dark:bg-slate-800 px-3 py-2">
       <div className="flex items-center justify-between gap-2">
         <div className="flex-1">
-          <div className="text-xs font-medium text-slate-500">{label}</div>
+          <div className="text-xs font-medium text-slate-500 dark:text-slate-400">{label}</div>
           <input
             type="text"
             inputMode="decimal"
@@ -63,7 +63,7 @@ const PriceField = ({
                 setActivityPrice(dateKey, type, parsed || defaultPrice)
               }
             }}
-            className="w-full bg-transparent text-base font-semibold text-slate-900 outline-none"
+            className="w-full bg-transparent text-base font-semibold text-slate-900 dark:text-slate-100 outline-none"
           />
         </div>
         {isCustom && (
@@ -114,22 +114,22 @@ export function EntrySheet({ dateKey, onClose }: Props) {
       onClick={onClose}
     >
       <div
-        className="w-full max-w-md animate-slide-up rounded-t-3xl bg-white pb-[env(safe-area-inset-bottom)] shadow-2xl"
+        className="w-full max-w-md animate-slide-up rounded-t-3xl bg-white pb-[env(safe-area-inset-bottom)] shadow-2xl dark:bg-slate-900 dark:text-slate-100"
         onClick={(e) => e.stopPropagation()}
       >
-        <header className="sticky top-0 flex items-center justify-between border-b border-slate-100 bg-white px-5 py-4 rounded-t-3xl">
+        <header className="sticky top-0 flex items-center justify-between border-b border-slate-100 bg-white px-5 py-4 rounded-t-3xl dark:border-slate-800 dark:bg-slate-900">
           <div>
-            <div className="text-xs uppercase tracking-wide text-slate-400">
+            <div className="text-xs uppercase tracking-wide text-slate-400 dark:text-slate-500 dark:text-slate-400">
               {isToday ? 'Hoje' : 'Editar'}
             </div>
-            <div className="text-lg font-semibold capitalize text-slate-900">
+            <div className="text-lg font-semibold capitalize text-slate-900 dark:text-slate-100 dark:text-slate-100">
               {longDate(date)}
             </div>
           </div>
           <button
             type="button"
             onClick={onClose}
-            className="rounded-full p-2 text-slate-400 hover:bg-slate-100"
+            className="rounded-full p-2 text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800"
             aria-label="Fechar"
           >
             <CloseIcon size={20} />
@@ -149,8 +149,8 @@ export function EntrySheet({ dateKey, onClose }: Props) {
             >
               <span className="text-2xl">🎾</span>
               <div>
-                <div className="font-semibold text-slate-900">Aula</div>
-                <div className="text-xs text-slate-500">
+                <div className="font-semibold text-slate-900 dark:text-slate-100">Aula</div>
+                <div className="text-xs text-slate-500 dark:text-slate-400">
                   {formatMoney(
                     entry.classPrice ?? config.classPrice,
                     config.currency,
@@ -169,8 +169,8 @@ export function EntrySheet({ dateKey, onClose }: Props) {
             >
               <span className="text-2xl">🏓</span>
               <div>
-                <div className="font-semibold text-slate-900">Jogo</div>
-                <div className="text-xs text-slate-500">
+                <div className="font-semibold text-slate-900 dark:text-slate-100">Jogo</div>
+                <div className="text-xs text-slate-500 dark:text-slate-400">
                   {formatMoney(
                     entry.gamePrice ?? config.gamePrice,
                     config.currency,
@@ -203,7 +203,7 @@ export function EntrySheet({ dateKey, onClose }: Props) {
 
           <div>
             <div className="mb-2 flex items-center justify-between">
-              <h3 className="text-sm font-semibold text-slate-700">Extras</h3>
+              <h3 className="text-sm font-semibold text-slate-700 dark:text-slate-200">Extras</h3>
               {entry.extras.length > 0 && (
                 <span className="text-xs text-slate-400">
                   {entry.extras.length}{' '}
@@ -220,7 +220,7 @@ export function EntrySheet({ dateKey, onClose }: Props) {
                     className="flex items-center justify-between px-3 py-2.5"
                   >
                     <div className="flex-1">
-                      <div className="text-sm text-slate-900">{ex.label}</div>
+                      <div className="text-sm text-slate-900 dark:text-slate-100">{ex.label}</div>
                       <div className="text-xs text-slate-400">
                         {formatMoney(ex.amount, config.currency)}
                       </div>
@@ -282,7 +282,7 @@ export function EntrySheet({ dateKey, onClose }: Props) {
           </div>
 
           <div>
-            <h3 className="mb-2 text-sm font-semibold text-slate-700">Nota</h3>
+            <h3 className="mb-2 text-sm font-semibold text-slate-700 dark:text-slate-200">Nota</h3>
             <textarea
               data-testid="note-input"
               value={entry.note ?? ''}
@@ -302,7 +302,7 @@ export function EntrySheet({ dateKey, onClose }: Props) {
                 clearEntry(dateKey)
                 onClose()
               }}
-              className="w-full rounded-lg border border-slate-200 px-4 py-2.5 text-sm font-medium text-slate-500 hover:bg-slate-50"
+              className="w-full rounded-lg border border-slate-200 px-4 py-2.5 text-sm font-medium text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:bg-slate-800"
             >
               Limpar este dia
             </button>

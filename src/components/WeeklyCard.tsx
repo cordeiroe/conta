@@ -18,18 +18,24 @@ export function WeeklyCard() {
   return (
     <div
       data-testid="weekly-card"
-      className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm"
+      className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-900"
     >
       <div className="flex items-baseline justify-between">
         <div>
-          <div className="text-xs uppercase tracking-wide text-slate-500">
+          <div className="text-xs uppercase tracking-wide text-slate-500 dark:text-slate-400">
             Essa semana
           </div>
-          <div className="text-sm capitalize text-slate-700">{rangeLabel}</div>
+          <div className="text-sm capitalize text-slate-700 dark:text-slate-300">
+            {rangeLabel}
+          </div>
         </div>
         <div
           data-testid="weekly-total"
-          className={`text-lg font-bold ${hasAny ? 'text-slate-900' : 'text-slate-300'}`}
+          className={`text-lg font-bold ${
+            hasAny
+              ? 'text-slate-900 dark:text-slate-100'
+              : 'text-slate-300 dark:text-slate-600'
+          }`}
         >
           {formatMoney(totals.total, config.currency)}
         </div>

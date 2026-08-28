@@ -22,18 +22,18 @@ export function MonthGrid({ anchor, onChangeAnchor, onSelectDay }: Props) {
         <button
           type="button"
           onClick={goPrev}
-          className="rounded-full p-2 text-slate-500 hover:bg-slate-100"
+          className="rounded-full p-2 text-slate-500 dark:text-slate-400 hover:bg-slate-100"
           aria-label="Mês anterior"
         >
           <ChevronLeftIcon size={20} />
         </button>
-        <h2 className="text-base font-semibold capitalize text-slate-900">
+        <h2 className="text-base font-semibold capitalize text-slate-900 dark:text-slate-100">
           {monthLabel(anchor)}
         </h2>
         <button
           type="button"
           onClick={goNext}
-          className="rounded-full p-2 text-slate-500 hover:bg-slate-100"
+          className="rounded-full p-2 text-slate-500 dark:text-slate-400 hover:bg-slate-100"
           aria-label="Próximo mês"
         >
           <ChevronRightIcon size={20} />
@@ -73,8 +73,8 @@ export function MonthGrid({ anchor, onChangeAnchor, onSelectDay }: Props) {
                 !inMonth
                   ? 'text-slate-300 dark:text-slate-600'
                   : today
-                    ? 'bg-slate-900 font-semibold text-white dark:bg-white dark:text-slate-900'
-                    : 'text-slate-700 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800'
+                    ? 'bg-slate-900 font-semibold text-white dark:bg-white dark:text-slate-900 dark:text-slate-100'
+                    : 'text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800'
               }`}
             >
               <span>{day.getDate()}</span>
@@ -98,7 +98,7 @@ export function MonthGrid({ anchor, onChangeAnchor, onSelectDay }: Props) {
         })}
       </div>
 
-      <div className="mt-3 flex items-center justify-center gap-4 text-xs text-slate-500">
+      <div className="mt-3 flex items-center justify-center gap-4 text-xs text-slate-500 dark:text-slate-400">
         <span className="flex items-center gap-1.5">
           <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" /> aula
         </span>

@@ -83,18 +83,18 @@ export function Consolidated() {
         <button
           type="button"
           onClick={() => shift(-1)}
-          className="rounded-full p-2 text-slate-500 hover:bg-slate-100"
+          className="rounded-full p-2 text-slate-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800"
         >
           <ChevronLeftIcon size={20} />
         </button>
         <div className="flex items-center gap-2">
-          <h1 className="text-lg font-semibold capitalize text-slate-900">
+          <h1 className="text-lg font-semibold capitalize text-slate-900 dark:text-slate-100">
             {monthLabel(anchor)}
           </h1>
           {isMonthPaid(paidMonths, monthKey(anchor)) && (
             <span
               data-testid="paid-badge"
-              className="rounded-full bg-emerald-100 px-2 py-0.5 text-xs font-semibold text-emerald-700"
+              className="rounded-full bg-emerald-100 px-2 py-0.5 text-xs font-semibold text-emerald-700 dark:bg-emerald-900 dark:text-emerald-200"
             >
               ✓ Pago
             </span>
@@ -103,7 +103,7 @@ export function Consolidated() {
         <button
           type="button"
           onClick={() => shift(1)}
-          className="rounded-full p-2 text-slate-500 hover:bg-slate-100"
+          className="rounded-full p-2 text-slate-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800"
         >
           <ChevronRightIcon size={20} />
         </button>
@@ -115,8 +115,8 @@ export function Consolidated() {
         onClick={() => toggleMonthPaid(monthKey(anchor))}
         className={`w-full rounded-2xl border px-4 py-2.5 text-sm font-semibold transition-colors ${
           isMonthPaid(paidMonths, monthKey(anchor))
-            ? 'border-emerald-200 bg-emerald-50 text-emerald-700'
-            : 'border-slate-200 bg-white text-slate-700 hover:bg-slate-50'
+            ? 'border-emerald-200 bg-emerald-50 text-emerald-700 dark:border-emerald-800 dark:bg-emerald-950/40 dark:text-emerald-300'
+            : 'border-slate-200 bg-white text-slate-700 hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800'
         }`}
       >
         {isMonthPaid(paidMonths, monthKey(anchor))
@@ -173,7 +173,7 @@ export function Consolidated() {
         <button
           type="button"
           onClick={copy}
-          className="flex items-center justify-center gap-2 rounded-2xl border border-slate-200 bg-white py-3 text-sm font-semibold text-slate-900 hover:bg-slate-50"
+          className="flex items-center justify-center gap-2 rounded-2xl border border-slate-200 bg-white py-3 text-sm font-semibold text-slate-900 hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 dark:hover:bg-slate-800"
         >
           <CopyIcon size={18} />
           {copied ? 'Copiado!' : 'Copiar resumo'}
@@ -190,21 +190,25 @@ export function Consolidated() {
 
       <div
         data-testid="ytd-card"
-        className="rounded-2xl border border-slate-200 bg-white p-4"
+        className="rounded-2xl border border-slate-200 bg-white p-4 dark:border-slate-700 dark:bg-slate-900"
       >
         <div className="flex items-baseline justify-between">
           <div>
-            <div className="text-xs uppercase tracking-wide text-slate-500">
+            <div className="text-xs uppercase tracking-wide text-slate-500 dark:text-slate-400">
               Total no ano
             </div>
-            <div className="text-sm text-slate-700">
+            <div className="text-sm text-slate-700 dark:text-slate-300">
               {new Date().getFullYear()} • {ytd.classesCount} aulas •{' '}
               {ytd.gamesCount} jogos
             </div>
           </div>
           <div
             data-testid="ytd-total"
-            className={`text-lg font-bold ${ytd.total > 0 ? 'text-slate-900' : 'text-slate-300'}`}
+            className={`text-lg font-bold ${
+              ytd.total > 0
+                ? 'text-slate-900 dark:text-slate-100'
+                : 'text-slate-300 dark:text-slate-600'
+            }`}
           >
             {formatMoney(ytd.total, config.currency)}
           </div>
@@ -230,17 +234,17 @@ export function Consolidated() {
               return (
                 <li
                   key={k}
-                  className="rounded-2xl border border-slate-200 bg-white px-4 py-3"
+                  className="rounded-2xl border border-slate-200 bg-white px-4 py-3 dark:border-slate-700 dark:bg-slate-900"
                 >
                   <div className="flex items-baseline justify-between">
-                    <div className="font-semibold capitalize text-slate-900">
+                    <div className="font-semibold capitalize text-slate-900 dark:text-slate-100">
                       {dayLabel(k)}
                     </div>
-                    <div className="font-mono text-sm font-semibold text-slate-900">
+                    <div className="font-mono text-sm font-semibold text-slate-900 dark:text-slate-100">
                       {formatMoney(subtotal, config.currency)}
                     </div>
                   </div>
-                  <div className="mt-1 flex flex-wrap gap-2 text-xs text-slate-500">
+                  <div className="mt-1 flex flex-wrap gap-2 text-xs text-slate-500 dark:text-slate-400">
                     {e.class && (
                       <span className="rounded-full bg-emerald-50 px-2 py-0.5 text-emerald-700">
                         aula{' '}
