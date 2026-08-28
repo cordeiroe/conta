@@ -6,6 +6,12 @@ compatibility_flags = ["nodejs_compat"]
 [observability]
 enabled = true
 
+# Custom domain — same parent domain as the frontend (cordeiroe.dev)
+# so CF Access cookies are sent automatically (same-site request)
+routes = [
+  { pattern = "api.conta.cordeiroe.dev/*", custom_domain = true }
+]
+
 # D1 database binding
 [[d1_databases]]
 binding = "DB"
