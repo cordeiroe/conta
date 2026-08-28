@@ -238,46 +238,50 @@ export function EntrySheet({ dateKey, onClose }: Props) {
               </ul>
             )}
 
-            <div className="flex gap-2">
-              <select
-                data-testid="extra-category"
-                value={extraCategory}
-                onChange={(e) => setExtraCategory(e.target.value)}
-                className="rounded-lg border border-slate-200 bg-white px-2 py-2 text-sm outline-none focus:border-emerald-500 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100"
-              >
-                <option value="">Categoria...</option>
-                {EXTRA_CATEGORIES.map((c) => (
-                  <option key={c} value={c}>
-                    {c}
-                  </option>
-                ))}
-              </select>
-              <input
-                type="text"
-                placeholder="O quê? (ex: grip)"
-                value={extraLabel}
-                onChange={(e) => setExtraLabel(e.target.value)}
-                className="flex-1 rounded-lg border border-slate-200 bg-white px-2 py-2 text-sm outline-none focus:border-emerald-500 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100"
-              />
-              <input
-                type="text"
-                inputMode="decimal"
-                placeholder="0,00"
-                value={extraAmount}
-                onChange={(e) => setExtraAmount(e.target.value)}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter') submitExtra()
-                }}
-                className="w-24 rounded-lg border border-slate-200 bg-white px-2 py-2 text-sm outline-none focus:border-emerald-500 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100"
-              />
-              <button
-                type="button"
-                onClick={submitExtra}
-                className="flex items-center justify-center rounded-lg bg-slate-900 px-3 text-white hover:bg-slate-800"
-                aria-label="Adicionar extra"
-              >
-                <PlusIcon size={18} />
-              </button>
+            <div className="space-y-2">
+              <div className="flex gap-2">
+                <select
+                  data-testid="extra-category"
+                  value={extraCategory}
+                  onChange={(e) => setExtraCategory(e.target.value)}
+                  className="w-24 flex-shrink-0 rounded-lg border border-slate-200 bg-white px-2 py-2 text-sm outline-none focus:border-emerald-500 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100"
+                >
+                  <option value="">cat...</option>
+                  {EXTRA_CATEGORIES.map((c) => (
+                    <option key={c} value={c}>
+                      {c}
+                    </option>
+                  ))}
+                </select>
+                <input
+                  type="text"
+                  placeholder="O quê? (ex: grip)"
+                  value={extraLabel}
+                  onChange={(e) => setExtraLabel(e.target.value)}
+                  className="min-w-0 flex-1 rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm outline-none focus:border-emerald-500 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100"
+                />
+              </div>
+              <div className="flex gap-2">
+                <input
+                  type="text"
+                  inputMode="decimal"
+                  placeholder="0,00"
+                  value={extraAmount}
+                  onChange={(e) => setExtraAmount(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') submitExtra()
+                  }}
+                  className="min-w-0 flex-1 rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm outline-none focus:border-emerald-500 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100"
+                />
+                <button
+                  type="button"
+                  onClick={submitExtra}
+                  className="flex w-12 flex-shrink-0 items-center justify-center rounded-lg bg-slate-900 text-white hover:bg-slate-800 dark:bg-emerald-600 dark:hover:bg-emerald-500"
+                  aria-label="Adicionar extra"
+                >
+                  <PlusIcon size={20} />
+                </button>
+              </div>
             </div>
           </div>
 
