@@ -3,6 +3,7 @@ import { useContaStore } from '../store/useContaStore'
 import { totalsForMonth } from '../lib/totals'
 import { formatMoney } from '../lib/totals'
 import { buildWhatsappMessage } from '../lib/whatsapp'
+import { yearTotals } from '../lib/year'
 import { monthLabel, fromKey, monthKey, dayLabel } from '../lib/dates'
 import { ChevronLeftIcon, ChevronRightIcon, CopyIcon, WhatsappIcon } from '../components/icons'
 
@@ -15,6 +16,11 @@ export function Consolidated() {
   const totals = useMemo(
     () => totalsForMonth(entries, config, anchor),
     [entries, config, anchor],
+  )
+
+  const ytd = useMemo(
+    () => yearTotals(entries, config, new Date()),
+    [entries, config],
   )
 
   const message = useMemo(
@@ -152,6 +158,29 @@ export function Consolidated() {
           <WhatsappIcon size={18} />
           WhatsApp
         </button>
+      </div>
+
+      <div
+        data-testid="ytd-card"
+        className="rounded-2xl border border-slate-200 bg-white p-4"
+      >
+        <div className="flex items-baseline justify-between">
+          <div>
+            <div className="text-xs uppercase tracking-wide text-slate-500">
+              Total no ano
+            </div>
+            <div className="text-sm text-slate-700">
+              {new Date().getFullYear()} • {ytd.classesCount} aulas •{' '}
+              {ytd.gamesCount} jogos
+            </div>
+          </div>
+          <div
+            data-testid="ytd-total"
+            className={`text-lg font-bold ${ytd.total > 0 ? 'text-slate-900' : 'text-slate-300'}`}
+          >
+            {formatMoney(ytd.total, config.currency)}
+          </div>
+        </div>
       </div>
 
       <div>
