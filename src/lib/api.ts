@@ -68,7 +68,7 @@ export class ApiError extends Error {
 
 export const api = {
   async sync(): Promise<SyncResponse> {
-    return request<SyncResponse>('/api/sync')
+    return request<SyncResponse>('/sync')
   },
 
   async upsertEntry(date: string, entry: ServerEntry): Promise<void> {
@@ -85,7 +85,7 @@ export const api = {
   async upsertConfig(
     config: Config & { updatedAt: string },
   ): Promise<void> {
-    await request('/api/config', {
+    await request('/config', {
       method: 'PUT',
       body: JSON.stringify(config),
     })
@@ -113,7 +113,7 @@ export const api = {
     }>
     paidMonths?: Record<string, string>
   }): Promise<{ ok: boolean; migrated: { entries: number; config: number; paidMonths: number } }> {
-    return request('/api/migrate', {
+    return request('/migrate', {
       method: 'POST',
       body: JSON.stringify(payload),
     })
