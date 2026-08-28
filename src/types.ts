@@ -15,6 +15,7 @@ export interface Entry {
   game: boolean
   gamePrice?: number
   extras: Extra[]
+  note?: string
   updatedAt: string
 }
 

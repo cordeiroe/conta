@@ -263,6 +263,20 @@ export function EntrySheet({ dateKey, onClose }: Props) {
             </div>
           </div>
 
+          <div>
+            <h3 className="mb-2 text-sm font-semibold text-slate-700">Nota</h3>
+            <textarea
+              data-testid="note-input"
+              value={entry.note ?? ''}
+              onChange={(e) =>
+                useContaStore.getState().setNote(dateKey, e.target.value)
+              }
+              placeholder="Algo pra lembrar desse dia?"
+              rows={2}
+              className="w-full resize-none rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm outline-none focus:border-emerald-500"
+            />
+          </div>
+
           {hasAny && (
             <button
               type="button"
