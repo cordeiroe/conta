@@ -4,6 +4,7 @@ import type { Entry, ActivityType } from '../types'
 import { CloseIcon, PlusIcon, TrashIcon } from './icons'
 import { parseAmount, formatMoney } from '../lib/totals'
 import { longDate, fromKey } from '../lib/dates'
+import { EXTRA_CATEGORIES } from '../types'
 
 const EMPTY_ENTRY: Entry = {
   date: '',
@@ -90,15 +91,19 @@ export function EntrySheet({ dateKey, onClose }: Props) {
   const isToday = new Date().toDateString() === date.toDateString()
 
   const [extraLabel, setExtraLabel] = useState('')
+  const [extraCategory, setExtraCategory] = useState<string>('')
   const [extraAmount, setExtraAmount] = useState('')
 
   const submitExtra = () => {
     const label = extraLabel.trim()
     const amount = parseAmount(extraAmount)
     if (!label || amount <= 0) return
-    addExtra(dateKey, label, amount)
+    const category =
+      extraCategory && extraCategory !== 'outro' ? extraCategory : undefined
+    addExtra(dateKey, label, amount, category)
     setExtraLabel('')
     setExtraAmount('')
+    setExtraCategory('')
   }
 
   const hasAny = entry.class || entry.game || entry.extras.length > 0
@@ -234,6 +239,19 @@ export function EntrySheet({ dateKey, onClose }: Props) {
             )}
 
             <div className="flex gap-2">
+              <select
+                data-testid="extra-category"
+                value={extraCategory}
+                onChange={(e) => setExtraCategory(e.target.value)}
+                className="rounded-lg border border-slate-200 bg-white px-2 py-2.5 text-sm outline-none focus:border-emerald-500"
+              >
+                <option value="">Categoria...</option>
+                {EXTRA_CATEGORIES.map((c) => (
+                  <option key={c} value={c}>
+                    {c}
+                  </option>
+                ))}
+              </select>
               <input
                 type="text"
                 placeholder="O quê? (ex: grip)"

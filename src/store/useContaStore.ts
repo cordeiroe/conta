@@ -34,7 +34,7 @@ interface ContaState {
   toggleActivity: (dateKey: string, type: ActivityType) => void
   setActivityPrice: (dateKey: string, type: ActivityType, price: number | undefined) => void
 
-  addExtra: (dateKey: string, label: string, amount: number) => void
+  addExtra: (dateKey: string, label: string, amount: number, category?: string) => void
   updateExtra: (dateKey: string, extraId: string, patch: Partial<Extra>) => void
   removeExtra: (dateKey: string, extraId: string) => void
 
@@ -106,10 +106,12 @@ export const useContaStore = create<ContaState>()(
           return { entries: { ...s.entries, [dateKey]: updated } }
         }),
 
-      addExtra: (dateKey, label, amount) =>
+      addExtra: (dateKey, label, amount, category) =>
         set((s) => {
           const current = s.entries[dateKey] ?? emptyEntry(dateKey)
-          const extra: Extra = { id: uid(), label, amount }
+          const extra: Extra = category
+            ? { id: uid(), label, amount, category }
+            : { id: uid(), label, amount }
           const updated: Entry = {
             ...current,
             extras: [...current.extras, extra],
