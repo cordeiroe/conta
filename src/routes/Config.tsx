@@ -46,7 +46,10 @@ export function Config() {
   }
 
   return (
-    <div className="mx-auto w-full max-w-md space-y-6 px-4 pb-24 pt-6">
+    <div
+      className="mx-auto w-full max-w-md space-y-6 px-4 pb-24 pt-6"
+      style={{ paddingTop: 'calc(1.5rem + env(safe-area-inset-top, 0px))' }}
+    >
       <h1 className="text-xl font-semibold text-slate-900">Configurações</h1>
 
       <section className="rounded-2xl border border-slate-200 bg-white p-4">

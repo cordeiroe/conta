@@ -66,7 +66,10 @@ export function Consolidated() {
   }
 
   return (
-    <div className="mx-auto w-full max-w-md space-y-5 px-4 pb-24 pt-6">
+    <div
+      className="mx-auto w-full max-w-md space-y-5 px-4 pb-24 pt-6"
+      style={{ paddingTop: 'calc(1.5rem + env(safe-area-inset-top, 0px))' }}
+    >
       <div className="flex items-center justify-between">
         <button
           type="button"
